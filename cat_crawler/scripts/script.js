@@ -134,14 +134,13 @@ const loop = function () {
 
   
 
-  context.fillStyle = "#FBF5F3"; // hex for triangle color
+  context.fillStyle = "#E47041"; // hex for triangle color
   obXCoors.forEach((obXCoor) => {
 
     //collision field for obstacle
 
     context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
-    context.lineTo(obXCoor + 20, 385); // x = ^random + 20, y = coor. on "ground"
-    context.lineTo(obXCoor + 10, 435 - height); // x = ^random + 10, y = peak of triangle
+    context.arc(obXCoor, 345, 25, 0, 2 * Math.PI)
   
     context.closePath();
     context.fill();
