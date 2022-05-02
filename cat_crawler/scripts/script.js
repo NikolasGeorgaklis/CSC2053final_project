@@ -60,28 +60,30 @@ const controller = {
 
 };
 
+
+
 const loop = function () {
 
   if (controller.up && player.jumping == false) {
 
-    player.yVelocity -= 20;
+    player.yVelocity -= 30;
     player.jumping = true;
 
   }
 
   if (controller.left) {
 
-    player.xVelocity -= 0.5;
+    player.xVelocity -= 0.35;
 
   }
 
   if (controller.right) {
 
-    player.xVelocity += 0.5;
+    player.xVelocity += 0.35;
 
   }
 
-  player.yVelocity += 1.5;// gravity
+  player.yVelocity += 0.7;// gravity
   player.x += player.xVelocity;
   player.y += player.yVelocity;
   player.xVelocity *= 0.9;// friction
@@ -112,6 +114,10 @@ const loop = function () {
   context.fillRect(0, 0, 1220, 400); // x, y, width, height
 
 
+  //collision field for player 
+  context.strokeStyle = "white";
+  context.strokeRect(player.x,player.y,player.width, player.height);
+
   // Creates and fills the cube for each frame
   context.fillStyle = "#8DAA9D"; // hex for cube color
   context.beginPath();
@@ -123,13 +129,19 @@ const loop = function () {
   // Set the standard obstacle height
   const height = 200 * Math.cos(Math.PI / 6);
 
+  
+
   context.fillStyle = "#FBF5F3"; // hex for triangle color
   obXCoors.forEach((obXCoor) => {
+
+    //collision field for obstacle
+    context.strokeStyle = "white";
+    context.strokeRect(obXCoor,385,player.width, player.height);
     context.beginPath();
 
     context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
     context.lineTo(obXCoor + 20, 385); // x = ^random + 20, y = coor. on "ground"
-    context.lineTo(obXCoor + 10, 510 - height); // x = ^random + 10, y = peak of triangle
+    context.lineTo(obXCoor + 10, 435 - height); // x = ^random + 10, y = peak of triangle
   
     context.closePath();
     context.fill();
