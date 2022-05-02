@@ -3,6 +3,7 @@ const context = document.querySelector("canvas").getContext("2d");
 context.canvas.height = 400;
 context.canvas.width = 1220;
 
+
 let frameCount = 1;
 
 let obCount = frameCount;
@@ -23,6 +24,13 @@ const player = {
 
 
 };
+
+var cat = new Image()
+cat.src = 'images/will_d_cat.png';
+
+function drawCat(){
+  context.drawImage(cat,player.x,player.y,player.width,player.height)
+}
 
 const nextFrame = () => {
 
@@ -69,20 +77,20 @@ const loop = function () {
 
   if (controller.up && player.jumping == false) {
 
-    player.yVelocity -= 30;
+    player.yVelocity -= 20;
     player.jumping = true;
 
   }
 
   if (controller.left) {
 
-    player.xVelocity -= 0.35;
+    player.xVelocity -= 0.40;
 
   }
 
   if (controller.right) {
 
-    player.xVelocity += 0.35;
+    player.xVelocity += 0.40;
 
   }
 
@@ -116,16 +124,8 @@ const loop = function () {
   context.fillStyle = "#6ccad6";
   context.fillRect(0, 0, 1220, 400); // x, y, width, height
 
-
-  //collision field for player 
-  context.strokeStyle = "white";
-  context.strokeRect(player.x,player.y,player.width, player.height);
-
   // Creates and fills the cube for each frame
-  context.fillStyle = "#8DAA9D"; // hex for cube color
-  context.beginPath();
-  context.rect(player.x, player.y, player.width, player.height);
-  context.fill();
+ drawCat();
 
 
   // Create the obstacles for each frame
