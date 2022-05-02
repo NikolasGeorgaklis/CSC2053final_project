@@ -6,16 +6,13 @@ context.canvas.width = 1220;
 var cat = new Image()
 cat.src = 'images/will_d_cat.png';
 
-function drawCat(){
-  context.drawImage(cat,player.x,player.y,player.width,player.height)
-}
-
-
 let frameCount = 1;
 
 let obCount = frameCount;
 
 const obXCoors = [];
+
+let gameOver = false;
 
 const player = {
 
@@ -31,6 +28,15 @@ const player = {
 
 
 };
+
+//displays game over screen
+function DisplayGameOver(){
+    context.textAlign = 'center';
+    context.font = "40px Helvitica";
+    context.fillStyle = 'white';
+    context.fillText('Game Over :(', context.canvas.width/2, 300);
+}
+
 
 
 const nextFrame = () => {
@@ -72,7 +78,10 @@ const controller = {
 
 };
 
-
+//function to get cat image
+function drawCat(){
+  context.drawImage(cat,player.x,player.y,player.width,player.height)
+}
 
 const loop = function () {
 
@@ -123,8 +132,8 @@ const loop = function () {
   }
 
   //collision fields i.e. hit boxes
-  var rect1
-  var rect2
+  var playRect = {x: player.x - 2,y: player.y,w: player.width + 5, h: player.height + 5};
+  
 
   // Creates the backdrop for each frame
   context.fillStyle = "#6ccad6";
@@ -132,8 +141,8 @@ const loop = function () {
 
   //creates collision field for will d cat
   context.fillStyle = "white";
-  context.lineWidth = 1;
-  var rect1 = context.strokeRect(player.x - 2,player.y,player.width + 5,player.height + 5);
+  context.lineWidth = 0.01;
+  context.strokeRect(playRect.x,playRect.y,playRect.w,playRect.h);
   
   // Creates will d cat for each frame
   drawCat();
@@ -144,8 +153,11 @@ const loop = function () {
 
   
   obXCoors.forEach((obXCoor) => {
-    context.lineWidth = 1;
-    var rect2 = context.strokeRect(obXCoor-52,270,player.width + 15,player.height -5);
+
+    var obsRect = {x: obXCoor-52,y: 270,w: player.width + 15,h: player.height -5}
+    checkCollision(playRect,obsRect);
+    context.lineWidth = 0.01;
+    context.strokeRect(obsRect.x,obsRect.y,obsRect.w,obsRect.h);
     context.beginPath();
     context.fillStyle = "#E47041";
     context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
@@ -153,6 +165,20 @@ const loop = function () {
     context.closePath();
     context.fill();
   })
+
+  //collision detection logic
+
+  function checkCollision(rect1,rect2){
+    if(rect1.x> rect2.x+rect2.w||rect1.x+rect1.w < rect2.x|| rect1.y>rect2.y+rect2.h||rect1.y + rect1.h < rect2.y){
+      gameOver = false;
+    }
+    else{
+      gameOver = true;
+    }
+  }
+  
+
+
 
 
   // Creates the "ground" for each frame
@@ -164,9 +190,15 @@ const loop = function () {
   context.stroke();
 
   // call update when the browser is ready to draw again
-  window.requestAnimationFrame(loop);
+  if(!gameOver) 
+    window.requestAnimationFrame(loop)
+  else
+    DisplayGameOver();
+      
 
 };
+
+
 
 window.addEventListener("keydown", controller.keyListener)
 window.addEventListener("keyup", controller.keyListener);
