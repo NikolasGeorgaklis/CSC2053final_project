@@ -108,7 +108,7 @@ const loop = function () {
 
   }
   // Creates the backdrop for each frame
-  context.fillStyle = "#201A23";
+  context.fillStyle = "#6ccad6";
   context.fillRect(0, 0, 1220, 400); // x, y, width, height
 
 
@@ -137,7 +137,7 @@ const loop = function () {
 
 
   // Creates the "ground" for each frame
-  context.strokeStyle = "#2E2532";
+  context.strokeStyle = "#31805a";
   context.lineWidth = 30;
   context.beginPath();
   context.moveTo(0, 385);
