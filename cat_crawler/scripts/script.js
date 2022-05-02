@@ -99,7 +99,7 @@ const loop = function () {
   // if player is going off the left of the screen
   if (player.x < -20) {
 
-    player.x = 1220;
+    player.x = -10;
 
   } else if (player.x > 1220) {// if player goes past right boundary
 
