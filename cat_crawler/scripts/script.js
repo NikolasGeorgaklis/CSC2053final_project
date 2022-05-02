@@ -11,6 +11,7 @@ const obXCoors = [];
 
 const player = {
 
+  
   height: 32,
   jumping: true,
   width: 32,
@@ -18,6 +19,8 @@ const player = {
   xVelocity: 0,
   y: 0,
   yVelocity: 0
+
+
 
 };
 
@@ -135,9 +138,6 @@ const loop = function () {
   obXCoors.forEach((obXCoor) => {
 
     //collision field for obstacle
-    context.strokeStyle = "white";
-    context.strokeRect(obXCoor,385,player.width, player.height);
-    context.beginPath();
 
     context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
     context.lineTo(obXCoor + 20, 385); // x = ^random + 20, y = coor. on "ground"
