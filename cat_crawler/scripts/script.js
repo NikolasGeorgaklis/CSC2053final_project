@@ -34,7 +34,7 @@ function DisplayGameOver(){
     context.textAlign = 'center';
     context.font = "40px Helvitica";
     context.fillStyle = 'white';
-    context.fillText('Game Over :(', context.canvas.width/2, 300);
+    context.fillText('Game Over :(', context.canvas.width/2, 100);
 }
 
 
