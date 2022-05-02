@@ -38,7 +38,6 @@ function DisplayGameOver(){
 }
 
 
-
 const nextFrame = () => {
 
   frameCount++;
@@ -138,6 +137,11 @@ const loop = function () {
   // Creates the backdrop for each frame
   context.fillStyle = "#6ccad6";
   context.fillRect(0, 0, 1220, 400); // x, y, width, height
+  context.textAlign = 'right';
+  context.font = "30px Helvitica";
+  context.fillStyle = 'yellow';
+  context.fillText('Level ' + frameCount, context.canvas.width/5, 50);
+
 
   //creates collision field for will d cat
   context.fillStyle = "white";
@@ -177,8 +181,6 @@ const loop = function () {
     }
   }
   
-
-
 
 
   // Creates the "ground" for each frame
