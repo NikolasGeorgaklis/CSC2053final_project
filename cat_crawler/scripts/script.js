@@ -78,20 +78,20 @@ const loop = function () {
 
   if (controller.up && player.jumping == false) {
 
-    player.yVelocity -= 33;
+    player.yVelocity -= 37;
     player.jumping = true;
 
   }
 
   if (controller.left) {
 
-    player.xVelocity -= 0.5;
+    player.xVelocity -= 0.65;
 
   }
 
   if (controller.right) {
 
-    player.xVelocity += 0.5;
+    player.xVelocity += 0.65;
 
   }
 
@@ -121,10 +121,20 @@ const loop = function () {
     nextFrame();
 
   }
+
+  //collision fields i.e. hit boxes
+  var rect1
+  var rect2
+
   // Creates the backdrop for each frame
   context.fillStyle = "#6ccad6";
   context.fillRect(0, 0, 1220, 400); // x, y, width, height
 
+  //creates collision field for will d cat
+  context.fillStyle = "white";
+  context.lineWidth = 1;
+  var rect1 = context.strokeRect(player.x - 2,player.y,player.width + 5,player.height + 5);
+  
   // Creates will d cat for each frame
   drawCat();
   
@@ -132,10 +142,12 @@ const loop = function () {
   // Set the standard obstacle height
   const height = 200 * Math.cos(Math.PI / 6);
 
-  context.fillStyle = "#E47041"; // hex for triangle color
+  
   obXCoors.forEach((obXCoor) => {
-
-
+    context.lineWidth = 1;
+    var rect2 = context.strokeRect(obXCoor-52,270,player.width + 15,player.height -5);
+    context.beginPath();
+    context.fillStyle = "#E47041";
     context.moveTo(obXCoor, 385); // x = random, y = coor. on "ground"
     context.arc(obXCoor, 322, 50, 0, 2 * Math.PI)
     context.closePath();
@@ -159,3 +171,4 @@ const loop = function () {
 window.addEventListener("keydown", controller.keyListener)
 window.addEventListener("keyup", controller.keyListener);
 window.requestAnimationFrame(loop);
+
